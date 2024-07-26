@@ -1,3 +1,12 @@
+
+# Ngok Extention Add
+quarkus ext add io.quarkiverse.ngrok:quarkus-ngrok
+
+properies
+quarkus.ngrok.authtoken=
+
+
+
 Quarkus Security with JPA
 ========================
 

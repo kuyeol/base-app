@@ -23,13 +23,6 @@
 -- INSERT INTO follow (id, followid, personid)
 -- VALUES (2,2,2);
 
-INSERT INTO person(id,username) VALUES (1,'userA');
-INSERT INTO person(id,username) VALUES (2,'userB');
-
-INSERT INTO follow(id,requestId,targetId) VALUES (1,'userA','userB');
-
-INSERT INTO message(id,senderId,reciverId,content) VALUES (1,'userA','userB','HELLO WORLD!');
-
 
 
 -- CREATE TABLE IF NOT EXISTS PUBLIC."user" (
