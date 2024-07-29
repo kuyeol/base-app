@@ -5,7 +5,11 @@
 > [!NOTE]
 > ID 자동 생성 전략
 
+SequenceGenerator name="Emp_Gen";
+GeneratedValue generator = sequenceGenerator.getName(); 
+
 ```java
+
 @Id
 @SequenceGenerator(name="Emp_Gen", sequenceName="Emp_Seq")
 @GeneratedValue(generator="Emp_Gen")
