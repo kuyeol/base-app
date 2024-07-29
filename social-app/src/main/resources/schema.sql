@@ -1,26 +1,26 @@
--- INSERT INTO person (id, username) VALUES (1, 'Entertainment');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, username) VALUES (1, 'Entertainment');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (2, 'Movies', '1');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (3, 'Music', '1');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (4, 'Games', '1');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- ) VALUES (10, 'Electronics');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (12, 'TV', '10');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (13, 'Cellphones', '10');
--- INSERT INTO person (id, INSERT INTO person (id, name, parent) VALUES (2, 'Movies', '1');
+-- INSERT INTO person (productId, INSERT INTO person (productId, name, parent) VALUES (2, 'Movies', '1');
 -- , parent) VALUES (14, 'DVD Players', '10');
 --
--- INSERT INTO message (id, followname,messages) VALUES (1, 29.99, 'Return of the Jedi  Episode 6, Luke has the final ');
--- INSERT INTO message (id, followname,messages) VALUES (2, 29.99, 'Return of the Jedi  Episode 6, Luke has the final ');
+-- INSERT INTO message (productId, followname,messages) VALUES (1, 29.99, 'Return of the Jedi  Episode 6, Luke has the final ');
+-- INSERT INTO message (productId, followname,messages) VALUES (2, 29.99, 'Return of the Jedi  Episode 6, Luke has the final ');
 --
 --
--- INSERT INTO follow (id, followid, personid)
+-- INSERT INTO follow (productId, followid, personid)
 -- VALUES (1,1,2);
--- INSERT INTO follow (id, followid, personid)
+-- INSERT INTO follow (productId, followid, personid)
 -- VALUES (2,2,2);
 
 

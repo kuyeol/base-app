@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.acme</groupId>
     <artifactId>hibernate-orm-quickstart</artifactId>
@@ -8,7 +10,7 @@
     <properties>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.12.1</quarkus.platform.version>
+        <quarkus.platform.version>3.12.3</quarkus.platform.version>
         <surefire-plugin.version>3.1.2</surefire-plugin.version>
         <compiler-plugin.version>3.11.0</compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,10 +55,6 @@
         <!-- Testing: -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-openapi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
@@ -64,11 +62,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.ejb</groupId>
-            <artifactId>jakarta.ejb-api</artifactId>
-            <version>3.2.6</version>
         </dependency>
     </dependencies>
 
@@ -172,8 +165,12 @@
                                         <pluginExecution>
                                             <pluginExecutionFilter>
                                                 <groupId>io.fabric8</groupId>
-                                                <artifactId>docker-maven-plugin</artifactId>
-                                                <versionRange>[0.28.0,)</versionRange>
+                                                <artifactId>
+                                                    docker-maven-plugin
+                                                </artifactId>
+                                                <versionRange>
+                                                    [0.28.0,)
+                                                </versionRange>
                                                 <goals>
                                                     <goal>start</goal>
                                                     <goal>stop</goal>

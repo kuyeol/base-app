@@ -1,11 +1,10 @@
-package org.acme.hibernate.orm;
+package org.acme.hibernate.orm.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -20,7 +19,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import java.util.List;
-import java.util.stream.Stream;
+
 import org.jboss.logging.Logger;
 
 @Path("fruits")
@@ -28,9 +27,6 @@ import org.jboss.logging.Logger;
 @Produces("application/json")
 @Consumes("application/json")
 public class FruitResource {
-
-
-
 
   private static final Logger LOGGER = Logger.getLogger(FruitResource.class.getName());
 
@@ -77,14 +73,16 @@ public class FruitResource {
       throw new WebApplicationException("Fruit with id of " + id + " does not exist.", 404);
     }
 
-    entity.setName(fruit.getName()+"update");
+    entity.setName(fruit.getName() + "update");
 
     return entity;
   }
 
   @GET
   @Path("name/{name}")
-  public Fruit searchForName(@QueryParam("name") String name) {
+  public Fruit searchForName(
+      @QueryParam("name")
+      String name) {
 
     Fruit fruit = entityManager.find(Fruit.class, name);
     if (fruit == null) {
@@ -135,12 +133,6 @@ public class FruitResource {
                      .build();
     }
   }
-
-
-
-
-
-
 
 
 }

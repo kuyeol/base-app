@@ -25,7 +25,7 @@ private long getId;
 public class Employee {
   
 @Id 
-private long id;
+private long productId;
 
 @ManyToOne
 @JoinColumn(name="DEPT_ID")
@@ -42,7 +42,7 @@ private Department department;
 public class Department {
    
     @Id 
-    private long id;
+    private long productId;
     
     private String name;
    
@@ -59,7 +59,7 @@ public class Department {
 @Entity
 public class Department {
     @Id
-    private long id;
+    private long productId;
     
     private String name;
     
@@ -77,7 +77,7 @@ public class Department {
 
 @Entity
 public class Employee {
-    @Id private long id;
+    @Id private long productId;
     private String name;
     @ManyToMany
     private Collection<Project> projects;
@@ -85,7 +85,7 @@ public class Employee {
 }
 @Entity
 public class Project {
-    @Id private long id;
+    @Id private long productId;
     private String name;
     @ManyToMany(mappedBy="projects")
     private Collection<Employee> employees;
@@ -119,7 +119,7 @@ public class Project {
 >public class Employee {  
 > 
 >@Id 
->private long id;
+>private long productId;
 >private String name; 
 > 
 >@ManyToMany
@@ -144,7 +144,7 @@ public class Project {
 public class Employee {
   
   @Id 
-  private long id;
+  private long productId;
   
   private String name;
   
@@ -162,7 +162,7 @@ public class Employee {
 @Entity
 public class ParkingSpace {
     @Id 
-    private long id;
+    private long productId;
     
     private int lot;
     private String location;
