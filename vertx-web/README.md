@@ -1,3 +1,21 @@
+
+
+shortcut
+```bash
+#!bin/bash
+
+./mvnw package
+./mvnw exec:java
+
+
+```
+
+
+
+
+
+
+
 = Starter
 
 image:https://img.shields.io/badge/vert.x-4.5.9-purple.svg[link="https://vertx.io"]

@@ -1,118 +1,27 @@
-# IBM CATEGORY SAMPLE CODE ANALYST
-
-> category
-
-```JAVA
-import java.util.Collection;
-import javax.json.bind.annotation.JsonbTransient;
-
-public class Category {
-
-  public Category() {
-  }
-
-  public String name;
-  public Long id;
-
-  @JsonbTransient
-  public Long parent;
-
-  private Collection<Category> subCategories;
-
-  public Collection<Category> getSubCategories() {
-    return subCategories;
-  }
-
-  public void setSubCategories(Collection<Category> subCategories) {
-    this.subCategories = subCategories;
-  }
-}
-
-
-```
-
-> PRODUCT
-
-```java
-import java.math.BigDecimal;
-
-public class Product {
-
-  public Product() {
-  }
-
-  public Long id;
-
-  public BigDecimal price;
-
-  public String name;
-
-  public String description;
-
-  public String image;
-}
-
-```
-
-```java
-public class ProductCategory {
-
-  public ProductCategory() {
-  }
-
-  public Long id;
-
-  public Long productid;
-
-  public Long categoryid;
-}
-```
-
-AND LOGIC is
-> Resource CLASS
->> @Path("/CustomerOrderServicesWeb/jaxrs/Category")
->
->> @ApplicationScoped
->
->> @Produces("application/json")
->
-> > @Inject
-> > private InitDatabase initDatabase;
->
-> //....
-> > private static Category fromRow(Row row) {
-> > Category category = new Category();
-> > category.id = row.getLong("id");
-> > category.name = row.getString("name");
-> > category.parent = row.getLong("parent");       
-> > return category;
-> > }
-
 # Quarkus demo: Hibernate Reactive and RESTEasy Reactive
 
 This is a minimal CRUD service exposing a couple of endpoints over REST,
 with a front-end based on Angular so you can play with it from your browser.
 
 While the code is surprisingly simple, under the hood this is using:
-
-- RESTEasy Reactive to expose the REST endpoints
-- Hibernate Reactive to perform the CRUD operations on the database
-- A PostgreSQL database; see below to run one via Docker
-- ArC, the CDI inspired dependency injection tool with zero overhead
+ - RESTEasy Reactive to expose the REST endpoints
+ - Hibernate Reactive to perform the CRUD operations on the database
+ - A PostgreSQL database; see below to run one via Docker
+ - ArC, the CDI inspired dependency injection tool with zero overhead
 
 ## Requirements
 
 To compile and run this demo you will need:
 
-- JDK 11+
+- JDK 17+
 - GraalVM
 
 In addition, you will need either a PostgreSQL database, or Docker to run one.
 
-### Configuring GraalVM and JDK 11+
+### Configuring GraalVM and JDK 17+
 
 Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 11+ `java` command is on the path.
+been set, and that a JDK 17+ `java` command is on the path.
 
 See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image)
 for help setting up your environment.
@@ -146,11 +55,9 @@ First compile it:
 
 > ./mvnw package
 
-Next we need to make sure you have a PostgreSQL instance running (Quarkus automatically starts one for dev and test
-mode). To set up a PostgreSQL database with Docker:
+Next we need to make sure you have a PostgreSQL instance running (Quarkus automatically starts one for dev and test mode). To set up a PostgreSQL database with Docker:
 
-> docker run -it --rm=true --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e
-> POSTGRES_DB=quarkus_test -p 5432:5432 postgres:13.3
+> docker run -it --rm=true --name quarkus_test -e POSTGRES_USER=quarkus_test -e POSTGRES_PASSWORD=quarkus_test -e POSTGRES_DB=quarkus_test -p 5432:5432 postgres:13.3
 
 Connection properties for the Agroal datasource are defined in the standard Quarkus configuration file,
 `src/main/resources/application.properties`.
@@ -180,16 +87,14 @@ After getting a cup of coffee, you'll be able to run this binary directly:
 > ./target/hibernate-reactive-quickstart-1.0.0-SNAPSHOT-runner
 
 Please brace yourself: don't choke on that fresh cup of coffee you just got.
-
-Now observe the time it took to boot, and remember: that time was mostly spent to generate the tables in your database
-and import the initial data.
-
+    
+Now observe the time it took to boot, and remember: that time was mostly spent to generate the tables in your database and import the initial data.
+    
 Next, maybe you're ready to measure how much memory this service is consuming.
 
 N.B. This implies all dependencies have been compiled to native;
 that's a whole lot of stuff: from the bytecode enhancements that Hibernate ORM
-applies to your entities, to the lower level essential components such as the PostgreSQL JDBC driver, the Undertow
-webserver.
+applies to your entities, to the lower level essential components such as the PostgreSQL JDBC driver, the Undertow webserver.
 
 ## See the demo in your browser
 
@@ -204,7 +109,7 @@ Have fun, and join the team of contributors!
 This section provides extra information for running both the database and the demo on Kubernetes.
 As well as running the DB on Kubernetes, a service needs to be exposed for the demo to connect to the DB.
 
-Then, rebuild demo docker image with a system property that points to the DB.
+Then, rebuild demo docker image with a system property that points to the DB. 
 
 ```bash
 -Dquarkus.datasource.reactive.url=jdbc:postgresql://<DB_SERVICE_NAME>/quarkus_test
