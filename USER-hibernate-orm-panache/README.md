@@ -1,3 +1,34 @@
+
+
+
+
+
+INSERT INTO t_artists (id, name, bio, created_date) VALUES
+(1, 'Agustina Lakin', 'Est et numquam deleniti dolore placeat. Sit quo quis voluptas. Ducimus non perferendis nemo.', '2021-05-20T15:40:00.548331Z'),
+
+INSERT INTO t_publishers (id, name, created_date) VALUES
+(1, 'Leaf Books', '2021-05-20T15:40:00.592040Z'),
+
+INSERT INTO t_items (dtype, id, artist_fk, publisher_fk, title, isbn, price, language, nb_of_pages, publication_date, description, created_date) VALUES
+('Book', 101, 77, 67, 'Butter In a Lordly Dish', '9781877664281', 73, 'ENGLISH', 27, '2018-06-21', 'Sit perspiciatis ipsum ut. Et quas est consectetur dolorem at. Voluptatum est voluptas voluptas repellendus. Enim quia ipsam sit et voluptates. Nulla corrupti temporibus aut autem itaque.', '2021-05-20T15:40:00.702118Z'),
+
+INSERT INTO t_items (dtype, id, artist_fk, title, price, genre, music_company, description, created_date) VALUES
+('CD', 1, 36, 'The OJays', 83, 'Pop', 'Carroll-Kuhn', 'Sunt repellendus ratione esse quos ea. Quibusdam quisquam id est harum dolores commodi. Similique qui consequatur rerum voluptatum ad reiciendis eos. Dolor et vel odio ea sed quam. Dolor quos veniam et voluptas maiores aut consequatur.', '2021-05-20T15:40:00.651551Z'),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Quarkus demo: Hibernate ORM with Panache and RESTEasy
 
 This is a minimal CRUD service exposing a couple of endpoints over REST,
