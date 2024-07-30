@@ -6,18 +6,18 @@ public class Category {
 
   public Long id;
   public String name;
-  public Long parentid;
+  public Long parent;
 
   public Category() {
 
   }
-  private Collection<Category> SubCategories;
+  private Collection<Category> subCategories;
 
   public Collection<Category> getSubCategories() {
-    return SubCategories;
+    return subCategories;
   }
 
   public void setSubCategories(Collection<Category> subCategories) {
-    SubCategories = subCategories;
+    subCategories = subCategories;
   }
 }

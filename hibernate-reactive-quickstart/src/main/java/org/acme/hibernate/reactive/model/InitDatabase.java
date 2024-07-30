@@ -40,7 +40,7 @@ public class InitDatabase {
 
     client.query("DROP TABLE IF EXISTS category").execute()
           .flatMap(
-              r -> client.query("CREATE TABLE category (id SERIAL PRIMARY KEY, name TEXT NOT NULL, parentid SERIAL)")
+              r -> client.query("CREATE TABLE category (id SERIAL PRIMARY KEY, name TEXT NOT NULL, parent SERIAL)")
                          .execute())
           .await().indefinitely()
     ;
@@ -120,9 +120,9 @@ public class InitDatabase {
     }
   }
 
-  private void addCategoryAndWait(Long id, String name, Long parentid) {
+  private void addCategoryAndWait(Long id, String name, Long parent) {
     try {
-      addCategory(id, name, parentid);
+      addCategory(id, name, parent);
       Thread.sleep(5);
     } catch (InterruptedException e) {
     }
@@ -162,12 +162,12 @@ public class InitDatabase {
         ;
   }
 
-  public CompletionStage<Category> addCategory(Long id, String name, Long parentid) {
+  public CompletionStage<Category> addCategory(Long id, String name, Long parent) {
     Category category = new Category();
     category.name = name;
-    category.parentid = parentid;
-    return client.preparedQuery("INSERT INTO category (id, name, parentid) VALUES ($1, $2, $3) RETURNING (id)")
-                 .execute(Tuple.of(id, name, parentid))
+    category.parent = parent;
+    return client.preparedQuery("INSERT INTO category (id, name, parent) VALUES ($1, $2, $3) RETURNING (id)")
+                 .execute(Tuple.of(id, name, parent))
                  //.toCompletableFuture()
                  //.orTimeout(MAXIMAL_DURATION, TimeUnit.MILLISECONDS)
                  .onItem()

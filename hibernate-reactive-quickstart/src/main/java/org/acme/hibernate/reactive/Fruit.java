@@ -30,7 +30,6 @@ public class Fruit {
 
     private Long parent;
 
-    private Collection<Fruit> SubCategories;
 
     public Fruit() {
     }
@@ -68,11 +67,5 @@ public class Fruit {
     this.parent = parent;
   }
 
-  public Collection<Fruit> getSubCategories() {
-    return SubCategories;
-  }
 
-  public void setSubCategories(Collection<Fruit> subCategories) {
-    SubCategories = subCategories;
-  }
 }
