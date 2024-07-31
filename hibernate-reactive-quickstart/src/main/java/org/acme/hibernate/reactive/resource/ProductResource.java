@@ -1,24 +1,23 @@
 package org.acme.hibernate.reactive.resource;
 
-
-
 import io.vertx.core.Vertx;
-import io.vertx.mutiny.sqlclient.Row;
-import io.vertx.mutiny.sqlclient.Tuple;
 import io.vertx.kafka.client.producer.KafkaProducer;
 import io.vertx.kafka.client.producer.KafkaProducerRecord;
+import io.vertx.mutiny.sqlclient.Row;
+import io.vertx.mutiny.sqlclient.RowSet;
+import io.vertx.mutiny.sqlclient.Tuple;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,24 +55,21 @@ public class ProductResource {
     CompletionStage<List<ProductCategory>> productCategories = getProductCategories();
     Long categoryIdLong = new Long(categoryId);
 
-    return products
-        .thenCombine(productCategories, (productsRead, productCategoriesRead) -> {
-          List<Product> output = new ArrayList<Product>();
-          List<ProductCategory> productCategoriesFiltered =
-              productCategoriesRead.stream().filter(productCategoryRead -> {
-                                     return productCategoryRead.categoryid.equals(categoryIdLong);
-                                   })
-                                   .collect(Collectors.toList());
+    return products.thenCombine(productCategories, (productsRead, productCategoriesRead) -> {
+      List<Product> output = new ArrayList<Product>();
+      List<ProductCategory> productCategoriesFiltered = productCategoriesRead.stream().filter(productCategoryRead -> {
+        return productCategoryRead.categoryid.equals(categoryIdLong);
+      }).collect(Collectors.toList());
 
-          productCategoriesFiltered.forEach(productCategoryFiltered -> {
-            productsRead.forEach(productRead -> {
-              if (productRead.id.equals(productCategoryFiltered.productid)) {
-                output.add(productRead);
-              }
-            });
-          });
-          return output;
+      productCategoriesFiltered.forEach(productCategoryFiltered -> {
+        productsRead.forEach(productRead -> {
+          if (productRead.id.equals(productCategoryFiltered.productid)) {
+            output.add(productRead);
+          }
         });
+      });
+      return output;
+    });
   }
 
   public CompletionStage<List<Product>> getProducts() {
@@ -89,8 +85,7 @@ public class ProductResource {
           List<Product> products = new ArrayList<>(rows.size());
           rows.forEach(row -> products.add(fromRow(row)));
           return products;
-        })
-                 .subscribeAsCompletionStage();
+        }).subscribeAsCompletionStage();
   }
 
   public CompletionStage<List<ProductCategory>> getProductCategories() {
@@ -106,8 +101,7 @@ public class ProductResource {
           List<ProductCategory> productCategories = new ArrayList<>(rows.size());
           rows.forEach(row -> productCategories.add(fromRowProductCategory(row)));
           return productCategories;
-        })
-                 .subscribeAsCompletionStage();
+        }).subscribeAsCompletionStage();
   }
 
   private static ProductCategory fromRowProductCategory(Row row) {
@@ -135,10 +129,10 @@ public class ProductResource {
   public CompletionStage<Product> update(
       @PathParam("id")
       Long id, Product updatedProduct) {
-    System.out.println(
-        "/CustomerOrderServicesWeb/jaxrs/Product @PUT updateProduct invoked in Quarkus reactive catalog service");
+    System.out.println("@PUT updateProduct invoked in Quarkus reactive catalog service");
 
     String statement = "UPDATE product SET price = $1 WHERE ID = $2";
+
     return client.preparedQuery(statement).execute(Tuple.of(updatedProduct.price, id))
                  //.toCompletableFuture()
                  //.orTimeout(MAXIMAL_DURATION, TimeUnit.MILLISECONDS)
@@ -149,8 +143,41 @@ public class ProductResource {
                  .onItem().transform(rows -> {
           sendMessageToKafka(id, updatedProduct.price);
           return updatedProduct;
-        })
-                 .subscribeAsCompletionStage();
+        }).subscribeAsCompletionStage();
+  }
+
+  @POST
+  @Consumes("application/json")
+  @Produces("application/json")
+  @Path("new/{id}")
+  public CompletionStage<ProductCategory> updates(
+      @PathParam("id")
+      Long id, ProductCategory updatedProduct) {
+    System.out.println("@PUT updateProduct invoked in Quarkus reactive catalog service");
+
+    // TODO: refactoring
+    //Product product = new Product();
+    //product.price = products.price;
+    //product.name = products.name;
+    //product.description = products.description;
+    //product.image = products.image;
+    //
+    //
+
+    String statement2 = "INSERT INTO productcategory (id, productid, categoryid) VALUES ($1, $2, $3) RETURNING (id)";
+    //"INSERT INTO productcategory (id, productid, categoryid) VALUES ($1, $2, $3) RETURNING (id)"
+
+    return client.preparedQuery(statement2).execute(Tuple.of(updatedProduct.productid, id))
+                 //.toCompletableFuture()
+                 //.orTimeout(MAXIMAL_DURATION, TimeUnit.MILLISECONDS)
+                 //.exceptionally(throwable -> {
+                 //    System.out.println(throwable);
+                 //    return null;
+                 //})
+                 .onItem().transform(rows -> {
+          sendMessageToKafka(id, updatedProduct.productid);
+          return updatedProduct;
+        }).subscribeAsCompletionStage();
   }
 
   @ConfigProperty(name = "kafka.bootstrap.servers")
@@ -182,5 +209,46 @@ public class ProductResource {
           "Kafka message sent: product-price-updated - " + productIdString + "#" + priceString));
     } catch (Exception e) {
     }
+  }
+
+  public void sendMessageToKafka(Long productId, Long id) {
+    String productIdString = productId.toString();
+    String priceString = id.toString();
+    try {
+      KafkaProducerRecord<String, String> record =
+          KafkaProducerRecord.create("product-price-updated", productIdString + "#" + priceString);
+      producer.write(record, done -> System.out.println(
+          "Kafka message sent: product-price-updated - " + productIdString + "#" + priceString));
+    } catch (Exception e) {
+    }
+  }
+
+  @POST
+  @Path("/CREATE")
+  public CompletionStage<Product> addProduct(Product products) {
+    Product product = new Product();
+    product.price = products.price;
+    product.name = products.name;
+    product.description = products.description;
+    product.image = products.image;
+
+    return client.preparedQuery(
+                     "INSERT INTO product (id, price, name, description, image) VALUES ($1, $2, $3, $4, " + "$5) RETURNING (id)")
+                 .execute(Tuple.of(products.id, products.price, products.name, products.description, products.image))
+                 // to be done: change to Mutiny
+                 //.toCompletableFuture()
+                 //.orTimeout(MAXIMAL_DURATION, TimeUnit.MILLISECONDS)
+                 .onItem()
+                 .transform(pgRowSet -> {
+                   product.id = ((RowSet<Row>) pgRowSet).iterator().next().getLong("id");
+                   return product;
+                 })
+                 .subscribeAsCompletionStage()
+        // to be done: change to Mutiny
+        //.exceptionally(throwable -> {
+        //    System.out.println(throwable);
+        //    throw new RuntimeException();
+        //})
+        ;
   }
 }
