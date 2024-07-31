@@ -15,6 +15,9 @@ public class InitDatabase {
   @Inject
   io.vertx.mutiny.pgclient.PgPool client;
 
+  public InitDatabase() {
+  }
+
   @PostConstruct
   //@Blocking
   public void config() {
@@ -40,7 +43,7 @@ public class InitDatabase {
 
     client.query("DROP TABLE IF EXISTS category").execute()
           .flatMap(
-              r -> client.query("CREATE TABLE category (id SERIAL PRIMARY KEY, name TEXT NOT NULL, parent SERIAL)")
+              r -> client.query("CREATE TABLE category (id SERIAL PRIMARY KEY, name TEXT NOT NULL, parentid SERIAL)")
                          .execute())
           .await().indefinitely()
     ;
@@ -120,9 +123,9 @@ public class InitDatabase {
     }
   }
 
-  private void addCategoryAndWait(Long id, String name, Long parent) {
+  private void addCategoryAndWait(Long id, String name, Long parentid) {
     try {
-      addCategory(id, name, parent);
+      addCategory(id, name, parentid);
       Thread.sleep(5);
     } catch (InterruptedException e) {
     }
@@ -162,12 +165,12 @@ public class InitDatabase {
         ;
   }
 
-  public CompletionStage<Category> addCategory(Long id, String name, Long parent) {
+  public CompletionStage<Category> addCategory(Long id, String name, Long parentid) {
     Category category = new Category();
     category.name = name;
-    category.parent = parent;
-    return client.preparedQuery("INSERT INTO category (id, name, parent) VALUES ($1, $2, $3) RETURNING (id)")
-                 .execute(Tuple.of(id, name, parent))
+    category.parentid = parentid;
+    return client.preparedQuery("INSERT INTO category (id, name, parentid) VALUES ($1, $2, $3) RETURNING (id)")
+                 .execute(Tuple.of(id, name, parentid))
                  //.toCompletableFuture()
                  //.orTimeout(MAXIMAL_DURATION, TimeUnit.MILLISECONDS)
                  .onItem()
