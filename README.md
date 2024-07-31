@@ -1,4 +1,15 @@
 
+
+> [!NOTE]
+> Swagger EXT add 
+```java
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-openapi</artifactId>
+        </dependency>
+```
+
+        
 # Ngok Extention Add
 quarkus ext add io.quarkiverse.ngrok:quarkus-ngrok
 
