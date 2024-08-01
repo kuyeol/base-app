@@ -168,7 +168,7 @@ public class InitDatabase {
   public CompletionStage<Category> addCategory(Long id, String name, Long parentid) {
     Category category = new Category();
     category.name = name;
-    category.parentid = parentid;
+    category.parent = parentid;
     return client.preparedQuery("INSERT INTO category (id, name, parentid) VALUES ($1, $2, $3) RETURNING (id)")
                  .execute(Tuple.of(id, name, parentid))
                  //.toCompletableFuture()

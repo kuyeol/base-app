@@ -1,6 +1,8 @@
 package org.acme.hibernate.reactive;
 
 import io.vertx.mutiny.sqlclient.Row;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +19,7 @@ import java.util.Collection;
 public class Fruit {
 
     @Id
-    @SequenceGenerator(name = "fruitsSequence", sequenceName = "known_fruits_id_seq", allocationSize = 1, initialValue = 10)
-    @GeneratedValue(generator = "fruitsSequence")
+    @Access(AccessType.PROPERTY)
     private Long id;
 
 
