@@ -24,13 +24,11 @@
 
 
 
+> [!NOTE] 
+> 자동주입 사용 코드
 
 
 ```java
-
-  /* 자동주입 사용 코드
-
-   */
 
   @Component
   public class Multiplier {
@@ -43,8 +41,7 @@
   public class Calculator {
 
     //--  곱셈 연산 클래스를 계산기 클래스에서 인스턴스 생성
-    //
-
+    
     @Autowired
     private Multiplier multiplier;
 
@@ -56,20 +53,17 @@
       return multiplier.multiply(a, b);
     }
   }
-
-  //--
+  
 
 
 ```
+
+
+
+> [!NOTE]
+> 자동 주입 미 사용 코드
+> 
 ```java
-
-
-
-
-  /*
- Do not using Autowired
- 어노테이션이 생략 된 코드
-   */
 
   @Component
   public class Multiplier {
