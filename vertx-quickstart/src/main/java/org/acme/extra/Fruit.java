@@ -38,7 +38,7 @@ public Fruit() {}
     this.color = color;
   }
 
-  public static Uni<List<Fruit>> findAll(PgPool client) {
+public static Uni<List<Fruit>> findAll(PgPool client) {
     return client.query("SELECT id, name ,color FROM fruits ORDER BY name ASC").execute()
                  .onItem().transform(pgRowSet -> {
           List<Fruit> list = new ArrayList<>(pgRowSet.size());

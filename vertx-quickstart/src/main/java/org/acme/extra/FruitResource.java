@@ -3,7 +3,9 @@ package org.acme.extra;
 import io.quarkus.runtime.StartupEvent;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -18,6 +20,11 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 @Path("fruits")
 public class FruitResource {
 
+
+
+
+
+
   private final PgPool client;
   private final FruitService fruitService;
   private final boolean schemaCreate;
@@ -28,6 +35,7 @@ public class FruitResource {
     this.client = client;
     this.schemaCreate = schemaCreate;
     this.fruitService = fruitService;
+
   }
 
   //void initdb(
@@ -110,5 +118,7 @@ public class FruitResource {
 
     return fruitService.findByColor(name);
   }
+
+
 
 }
