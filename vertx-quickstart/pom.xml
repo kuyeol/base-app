@@ -31,6 +31,22 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.redis/redis-smart-cache-core -->
+        <dependency>
+            <groupId>com.redis</groupId>
+            <artifactId>redis-smart-cache-core</artifactId>
+            <version>0.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.redis</groupId>
+            <artifactId>redis-smart-cache-jdbc</artifactId>
+            <version>0.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-redis-cache</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
@@ -70,11 +86,15 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-junit5</artifactId>
-            <scope>test</scope>
+            <artifactId>quarkus-redis-client</artifactId>
         </dependency>
 
         <!-- Extra -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -84,15 +104,20 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-reactive-pg-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.smallrye.reactive</groupId>
-            <artifactId>smallrye-mutiny-vertx-web</artifactId>
-        </dependency>
       <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-beans</artifactId>
-        <version>6.1.6</version>
+        <groupId>io.smallrye.reactive</groupId>
+        <artifactId>smallrye-mutiny-vertx-web</artifactId>
       </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>6.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.2.5</version>
+        </dependency>
 
     </dependencies>
     <build>

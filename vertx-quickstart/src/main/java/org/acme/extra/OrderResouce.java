@@ -21,7 +21,7 @@ public String hi(){
 
 
 
-@Autowired
+
   @Inject
   private  OrderService orderService;
 

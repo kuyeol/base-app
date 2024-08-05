@@ -1,6 +1,9 @@
 
 
-# Summary : 
+# Spring ANNOTAION : 
+
+<details><summary>@Autowired</summary>
+
 ## `@Autowired`
 
 > `@Target`
@@ -93,3 +96,30 @@
   }
 
 ```
+
+</details>
+
+
+
+<details><summary>@Configration</summary>
+
+
+>[!Note]
+> 
+> 애플리케이션 시작 시 종속성 INJECT
+>
+
+- 빈 정의(기본적으로 빈의 인스턴스 를 반환하는 메서드) 
+- 빈을 구성하고 종속성을 주입하는 방법에 대한 지침을 포함하는 클래스 범위의 어노테이션.
+- 주석을 통해 Spring 프레임워크는 Spring IoC 컨테이너가 Spring Context 초기화 중에 해당 Bean을 추가 하도록 선언
+
+> [!Note]
+> - 추가할 BEAN 구성에 대한 선언적 정의 
+> - 선언 클래스에서 인스턴스화 할때 해당 빈을 종속성에 추가해라
+> - 구체적 빈 선언 정의
+
+
+
+
+
+</details>
