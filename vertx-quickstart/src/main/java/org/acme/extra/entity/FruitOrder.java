@@ -1,4 +1,4 @@
-package org.acme.extra;
+package org.acme.extra.entity;
 
 import java.time.Instant;
 

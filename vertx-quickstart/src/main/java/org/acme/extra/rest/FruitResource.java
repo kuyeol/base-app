@@ -1,11 +1,7 @@
-package org.acme.extra;
+package org.acme.extra.rest;
 
-import io.quarkus.runtime.StartupEvent;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -15,6 +11,8 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.Response.Status;
 import java.net.URI;
+import org.acme.extra.entity.Fruit;
+import org.acme.extra.service.FruitService;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @Path("fruits")

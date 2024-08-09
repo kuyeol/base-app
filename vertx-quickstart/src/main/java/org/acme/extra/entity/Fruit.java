@@ -1,4 +1,4 @@
-package org.acme.extra;
+package org.acme.extra.entity;
 
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
