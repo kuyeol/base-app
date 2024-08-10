@@ -119,15 +119,6 @@
         <artifactId>smallrye-mutiny-vertx-web</artifactId>
       </dependency>
 
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-quarkus-outbox-reactive</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-core</artifactId>
-            <version>2.6.2.Final</version>
-        </dependency>
 
     </dependencies>
     <build>
