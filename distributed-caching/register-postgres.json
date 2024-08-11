@@ -1,17 +1,40 @@
-{
+
+curl --location 'http://182.218.135.229:8083/connectors/order-connector/config' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
   "name" : "order-connector",
   "config" : {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "tasks.max": "1",
-    "database.hostname": "order-db",
-    "database.port": "5432",
-    "database.user": "postgresuser",
-    "database.password": "postgrespw",
-    "database.dbname" : "orderdb",
+    "database.hostname": "postgres",
+    "database.port": "5443",
+    "database.user": "quarkus",
+    "database.password": "quarkus",
+    "database.dbname" : "postgres",
     "topic.prefix": "dbserver1",
     "decimal.handling.mode" : "string",
-    "schema.include.list": "inventory",
+    "schema.include.list": "postgres",
     "table.include.list": ".*purchaseorder,.*orderline",
     "poll.interval.ms": "100"
-  }
 }
+}'
+
+
+curl --location 'http://localhost:8083/connectors/' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--data '{
+"name": "cdc-using-debezium-connector",
+"config": {
+"connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+"database.hostname": "192.168.1.110",
+"database.port": "5443",
+"database.user": "postgres",
+"database.password": "123",
+"database.dbname": "cdc-using-debezium",
+"database.server.id": "184054",
+"table.include.list": "public.User",
+"topic.prefix": "cdc-using-debezium-topic"
+}
+}'
