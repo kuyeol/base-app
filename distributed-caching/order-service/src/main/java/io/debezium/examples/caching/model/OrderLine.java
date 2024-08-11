@@ -57,6 +57,11 @@ public class OrderLine {
         this.status = status;
     }
 
+    public OrderLine(Long id, String item) {
+        this.id = id;
+        this.item = item;
+    }
+
     public OrderLine(String item, Integer quantity, BigDecimal totalPrice) {
         this.item = item;
         this.quantity = quantity;

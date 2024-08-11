@@ -18,6 +18,26 @@ Prepare the Java components by first performing a Maven build.
 $ mvn clean package
 ```
 
+```yml
+
+
+  infinispan-server-nyc-1:
+    image:  quay.io/infinispan/server:13.0
+    ports:
+      - "31222:11222"
+    container_name: ispn-nyc-1
+    networks:
+      - my-network
+    volumes:
+      - ${PWD}:/user-config
+    command: -b SITE_LOCAL -c /user-config/infinispan-nyc.xml -Djgroups.cluster.mcast_addr=228.6.7.15 -Drelay.site=NYC
+
+
+```
+
+
+
+
 ## Environment
 
 Setup the necessary environment variables:
