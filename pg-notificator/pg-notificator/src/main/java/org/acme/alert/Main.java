@@ -21,9 +21,12 @@ public class Main
     String     password     = "quarkus";
     Connection connListener = DriverManager.getConnection(url, user, password);
     Connection connNotifier = DriverManager.getConnection(url, user, password);
+EventProvider eProvider=EventProvider.onMessage("");
 
+
+    
     Listner  listner  = new Listner(connListener);
-    Notifier notifier = new Notifier(connNotifier);
+    Notifier notifier = new Notifier(connNotifier,eProvider);
     listner.start();
     notifier.start();
   }
