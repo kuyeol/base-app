@@ -15,6 +15,10 @@ private static final Instant instant =Instant.now();
 
   private              org.postgresql.PGConnection pgConn;
 
+private EventProvider eProvider;
+
+
+  
   /*
   CREATE OR REPLACE FUNCTION update_ts_column_on_update() RETURNS TRIGGER AS $$ BEGIN NEW.ts = now();
 
@@ -34,16 +38,16 @@ private static final Instant instant =Instant.now();
 
   private static final String                      PL_Line_3 = "language 'plpgsql';";
 
+private String eventMsg;
 
 
-
-  Listner(Connection jCon) throws
+  Listner(Connection jCon,EventProvider ep) throws
       SQLException
   {
     this.jCon = jCon;
     this.pgConn = jCon.unwrap(PGConnection.class);
     Statement stmt = jCon.createStatement();
-
+this.eProvider=ep.onMessage("");
     stmt.execute("LISTEN  table_changes");
     stmt.close();
   }
@@ -63,7 +67,7 @@ private static final Instant instant =Instant.now();
 
           for (int i = 0; i < notification.length; i++) {
           PGNotification A = notification[i];
-
+eProvider.onMessage(A.getParameter().toString());
            // System.out.println(A.getName());
             System.out.println(A.getParameter().toString());
             System.out.println("for in"+instant.toString());
