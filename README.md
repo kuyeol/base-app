@@ -1,3 +1,14 @@
+# TODO 
+
+> [!note]
+> 
+> - 쿼커스 스레드온메세지
+>> https://quarkus.io/guides/messaging-virtual-threads
+>
+> - 스프링+posrgres Noti
+> >https://github.com/eugenp/tutorials/tree/master/messaging-modules/postgres-notify
+
+
 # Postgres 알림/리스너
 
 > [!note]
