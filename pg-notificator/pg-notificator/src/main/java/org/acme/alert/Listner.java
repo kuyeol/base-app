@@ -10,12 +10,14 @@ import org.postgresql.PGNotification;
 
 public class Listner extends Thread
 {
-private static final Instant instant =Instant.now();
-  private              Connection                  jCon;
 
-  private              org.postgresql.PGConnection pgConn;
+  private static final Instant       instant   = Instant.now();
 
-private EventProvider eProvider;
+  private              Connection    jCon;
+
+  private              PGConnection  pgConn;
+
+  private              EventProvider eProvider;
 
 
   
@@ -29,30 +31,28 @@ private EventProvider eProvider;
   language 'plpgsql';
   */
 
-  private static final String                      PL_Line_0 =
+  private static final String        PL_Line_0 =
       "CREATE OR REPLACE FUNCTION update_ts_column_on_update() RETURNS TRIGGER AS $$ " + "BEGIN" + " NEW.ts = now();";
 
-  private static final String                      PL_Line_1 = "RETURN NEW;";
+  private static final String        PL_Line_1 = "RETURN NEW;";
 
-  private static final String                      PL_Line_2 = "END;";
+  private static final String        PL_Line_2 = "END;";
 
-  private static final String                      PL_Line_3 = "language 'plpgsql';";
+  private static final String        PL_Line_3 = "language 'plpgsql';";
 
-private String eventMsg;
+  private              String        eventMsg;
 
 
-  Listner(Connection jCon,EventProvider ep) throws
+  Listner(Connection jCon, EventProvider eProvider) throws
       SQLException
   {
     this.jCon = jCon;
     this.pgConn = jCon.unwrap(PGConnection.class);
     Statement stmt = jCon.createStatement();
-this.eProvider=ep.onMessage("");
+    this.eProvider = eProvider;
     stmt.execute("LISTEN  table_changes");
     stmt.close();
   }
-
-
 
 
   public void run()
@@ -66,20 +66,16 @@ this.eProvider=ep.onMessage("");
         if (notification != null) {
 
           for (int i = 0; i < notification.length; i++) {
-          PGNotification A = notification[i];
-eProvider.onMessage(A.getParameter().toString());
-           // System.out.println(A.getName());
+            PGNotification A = notification[i];
+            eProvider.onMessage("provider"+A.getParameter().toString());
+            // System.out.println(A.getName());
             System.out.println(A.getParameter().toString());
-            System.out.println("for in"+instant.toString());
-
+            System.out.println("for in" + instant.toString());
           }
         }
-        Thread.sleep(2500);
-        System.out.println("while in"+instant.toString());
-
+        Thread.sleep(2000);
+        System.out.println("while in" + instant.toString());
       } // while end
-
-
     } //try end
     catch (SQLException e) {
       e.printStackTrace();
