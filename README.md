@@ -13,6 +13,11 @@
 ## Logical Decording
 
 > ### 1. Insert Config parameter
+> > `postgresql.conf` FIND A FILE LOCATION SCRIPT  
+>```sql
+>SHOW config_file;
+> --- /var/lib/postgresql/data/postgresql.conf
+>```
 > ```
 > wal_level = logical           
 > max_replication_slots = 10 
