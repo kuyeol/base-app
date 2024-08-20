@@ -7,6 +7,15 @@
 >
 > - 스프링+posrgres Noti
 > >https://github.com/eugenp/tutorials/tree/master/messaging-modules/postgres-notify
+# JAVA EE THORNTAIL 
+
+
+> [!CAUTION]
+> - MAVEN DEPENENCE ERROR
+> - 아래 스크립트 실행하여 버전 수정
+>> ```shell
+>> mvn io.thorntail:thorntail-maven-plugin:2.3.0.Final:migrate-from-wildfly-swarm
+>> ```
 
 # Postgres CDC
 
