@@ -27,11 +27,11 @@ import org.apache.kafka.streams.kstream.Materialized;
 import org.apache.kafka.streams.kstream.Produced;
 import org.apache.kafka.streams.kstream.ValueMapper;
 import org.apache.kafka.streams.state.KeyValueStore;
-
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
+
 
 /**
  * In this example, we implement a simple WordCount program using the high-level Streams DSL
@@ -39,43 +39,53 @@ import java.util.concurrent.CountDownLatch;
  * split each text line into words and then compute the word occurrence histogram, write the continuous updated histogram
  * into a topic "streams-wordcount-output" where each record is an updated count of a single word.
  */
-public class WordCount {
+public class WordCount
+{
 
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "streams-wordcount");
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
-        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+	public static void main( String[] args )
+		{
+			Properties props = new Properties();
+			props.put(StreamsConfig.APPLICATION_ID_CONFIG, "streams-wordcount");
+			props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "182.218.135.229:9092");
+			props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
+			props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
 
-        final StreamsBuilder builder = new StreamsBuilder();
+			final StreamsBuilder builder = new StreamsBuilder();
 
-        builder.<String, String>stream("streams-plaintext-input")
-               .flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split("\\W+")))
-               .groupBy((key, value) -> value)
-               .count(Materialized.<String, Long, KeyValueStore<Bytes, byte[]>>as("counts-store"))
-               .toStream()
-               .to("streams-wordcount-output", Produced.with(Serdes.String(), Serdes.Long()));
+			builder.< String, String >stream("hello")
+						 .flatMapValues(value -> Arrays.asList(value.toLowerCase(Locale.getDefault()).split("\\W+")))
+						 .groupBy(( key, value ) -> value)
+						 .count(Materialized.< String, Long, KeyValueStore< Bytes, byte[] > >as("price"))
+						 .toStream()
+						 .to("hello", Produced.with(Serdes.String(), Serdes.Long()));
 
-        final Topology topology = builder.build();
-        final KafkaStreams streams = new KafkaStreams(topology, props);
-        final CountDownLatch latch = new CountDownLatch(1);
+			final Topology topology = builder.build();
+			final KafkaStreams streams = new KafkaStreams(topology, props);
+			final CountDownLatch latch = new CountDownLatch(1);
 
-        // attach shutdown handler to catch control-c
-        Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook") {
-            @Override
-            public void run() {
-                streams.close();
-                latch.countDown();
-            }
-        });
+			// attach shutdown handler to catch control-c
+			Runtime.getRuntime().addShutdownHook(new Thread("streams-shutdown-hook")
+			{
 
-        try {
-            streams.start();
-            latch.await();
-        } catch (Throwable e) {
-            System.exit(1);
-        }
-        System.exit(0);
-    }
+				@Override
+				public void run()
+					{
+						streams.close();
+						latch.countDown();
+					}
+			});
+
+			try {
+				streams.start();
+				latch.await();
+			} catch ( Throwable e ) {
+				System.exit(1);
+			}
+			System.exit(0);
+		}
+
+
+
+
+
 }

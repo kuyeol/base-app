@@ -8,6 +8,8 @@ import io.vertx.mutiny.sqlclient.Tuple;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class Fruit {
 
   public Long id;

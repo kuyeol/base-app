@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>streams.examples</groupId>
-    <artifactId>streams-quickstart-Dversion=0.1</artifactId>
+    <artifactId>apache-kafka-streams-quickstart</artifactId>
     <version>1</version>
     <packaging>jar</packaging>
 

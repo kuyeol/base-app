@@ -15,22 +15,22 @@ import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
+
 @Path("/TEST")
-public class Resource {
+public class Resource
+  {
+
+  @GET
+  @Produces(MediaType.TEXT_PLAIN)
+  @Consumes(MediaType.TEXT_PLAIN)
+  public String hello()
+    {
+
+      return "Hello World";
+    }
 
 
 
 
-@GET
-@Produces(MediaType.TEXT_PLAIN)
-@Consumes(MediaType.TEXT_PLAIN)
-  public String hello() {
 
-
-
-  return "Hello World";
-}
-
-
-
-}
+  }

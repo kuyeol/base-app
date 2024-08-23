@@ -62,6 +62,9 @@ public class VertxResource {
   @GET
   @Path("/book")
   public Multi<String> readLargeFile() {
+
+
+
     return vertx.fileSystem().open("book.txt", new OpenOptions().setRead(true))
                 .onItem().transformToMulti(file -> file.toMulti())
                 .onItem().transform(content -> content.toString(StandardCharsets.UTF_8)

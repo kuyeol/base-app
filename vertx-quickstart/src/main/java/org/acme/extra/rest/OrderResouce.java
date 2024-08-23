@@ -15,6 +15,7 @@ import org.acme.extra.service.OrderService;
 public class OrderResouce {
 
 @GET
+@Path( "/init" )
 public String hi(){
   return "hi";
 }
@@ -30,6 +31,13 @@ public String hi(){
     orderService.config();
   }
 
+
+@Path("li")
+@GET
+public OrderService getOrderService()
+  {
+    return orderService.plrun();
+  }
 
 
 }
