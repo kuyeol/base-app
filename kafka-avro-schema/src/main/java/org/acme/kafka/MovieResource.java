@@ -6,6 +6,8 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.jboss.logging.Logger;
 
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.GET;
+
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
@@ -22,5 +24,12 @@ public class MovieResource {
         emitter.send(movie);
         return Response.accepted().build();
     }
+
+@GET
+@Path("test")
+public String a(){
+    return " ";
+}
+
 
 }
