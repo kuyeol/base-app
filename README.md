@@ -1,4 +1,13 @@
 # TODO 
+---
+## 24_8_29
+
+Rest App
+> Produce/@channel Emitter send message : 이벤트 생성 -> 카프카 전달
+
+Query App
+> @Consumer/ 토픽 리슨 /토픽에서 데이터 파싱/ 로직 실행 : 이벤트 리스너 
+---
 
 > [!note]
 > 
