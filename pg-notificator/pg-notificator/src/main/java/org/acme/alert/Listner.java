@@ -7,17 +7,15 @@ import java.time.Instant;
 import org.postgresql.PGConnection;
 import org.postgresql.PGNotification;
 
+public class Listner extends Thread {
 
-public class Listner extends Thread
-{
+  private static final Instant instant = Instant.now();
 
-  private static final Instant       instant   = Instant.now();
+  private Connection jCon;
 
-  private              Connection    jCon;
+  private PGConnection pgConn;
 
-  private              PGConnection  pgConn;
-
-  private              EventProvider eProvider;
+  private EventProvider eProvider;
 
 
   
@@ -31,21 +29,25 @@ public class Listner extends Thread
   language 'plpgsql';
   */
 
-  private static final String        PL_Line_0 =
+  private static final String PL_Line_0 =
       "CREATE OR REPLACE FUNCTION update_ts_column_on_update() RETURNS TRIGGER AS $$ " + "BEGIN" + " NEW.ts = now();";
 
-  private static final String        PL_Line_1 = "RETURN NEW;";
+  private static final String PL_Line_1 = "RETURN NEW;";
 
-  private static final String        PL_Line_2 = "END;";
+  private static final String PL_Line_2 = "END;";
 
-  private static final String        PL_Line_3 = "language 'plpgsql';";
+  private static final String PL_Line_3 = "language 'plpgsql';";
 
-  private              String        eventMsg;
+  private String eventMsg;
 
+<<<<<<< HEAD
 
   Listner(Connection jCon) throws
       SQLException
   {
+=======
+  Listner(Connection jCon, EventProvider eProvider) throws SQLException {
+>>>>>>> b1afb19b2062eff0f3af35c833264be981281357
     this.jCon = jCon;
     this.pgConn = jCon.unwrap(PGConnection.class);
     Statement stmt = jCon.createStatement();
@@ -53,9 +55,7 @@ public class Listner extends Thread
     stmt.close();
   }
 
-
-  public void run()
-  {
+  public void run() {
     //try entry
     try {
       while (true) {
@@ -66,6 +66,10 @@ public class Listner extends Thread
 
           for (int i = 0; i < notification.length; i++) {
             PGNotification A = notification[i];
+<<<<<<< HEAD
+=======
+            eProvider.onMessage("provider" + A.getParameter().toString());
+>>>>>>> b1afb19b2062eff0f3af35c833264be981281357
             // System.out.println(A.getName());
             System.out.println(A.getParameter().toString());
             System.out.println("for in" + instant.toString());
@@ -82,9 +86,4 @@ public class Listner extends Thread
     }
     // run method end
   }
-
-
-
-
-
 }

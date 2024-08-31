@@ -1,4 +1,13 @@
 # TODO 
+---
+## 24_8_29
+
+Rest App
+> Produce/@channel Emitter send message : 이벤트 생성 -> 카프카 전달
+
+Query App
+> @Consumer/ 토픽 리슨 /토픽에서 데이터 파싱/ 로직 실행 : 이벤트 리스너 
+---
 
 > [!note]
 > 
@@ -7,7 +16,7 @@
 >
 > - 스프링+posrgres Noti
 > >https://github.com/eugenp/tutorials/tree/master/messaging-modules/postgres-notify
-# JAVA EE THORNTAIL 
+
 
 
 # 클래스 작성 가이드
@@ -24,6 +33,7 @@
 > > - 클래스의 작업 결과
 > 
 > ### Operations : Methods
+
 > > - 클래스 작업 목록
 > > - e.g) 작업1, 작업2 ,작업3 ....
 > 
@@ -46,6 +56,48 @@
 # Postgres CDC
 
 ## Logical Decording
+
+> [!Note]
+>  - 슬롯 생성
+> ```sql
+> SELECT * FROM pg_create_logical_replication_slot('demo_slot', 'test_decoding');
+> ```
+>  -  메세지 생성
+> ```sql
+>SELECT * FROM pg_logical_emit_message(true, 'context1', 'Hello11 11World!');
+> ```
+> 
+> - 메세지 확인
+> ```sql
+>SELECT * FROM pg_logical_slot_get_changes('demo_slot', NULL, NULL);
+> ```
+
+- 메세지 생성 예제
+```sql
+SELECT * FROM pg_logical_slot_get_changes('demo_slot', NULL, NULL);
+
+--SELECT * FROM pg_logical_slot_peek_changes();
+
+
+SELECT * FROM pg_logical_emit_message(
+        true,
+        'outbox',
+        '{
+          "id" : "298c2cc3-71bb-4d2b-b5b4-1b14006d56e6",
+          "aggregate_type" : "shipment",
+          "aggregate_id" : 42,
+          "payload" : {
+            "customer_id" : 7398,
+            "item_id" : 8123,
+            "status" : "SHIPPED",
+            "numberOfPackages" : 3,
+            "address" : "Bob Summers, 12 Main St., 90210, Los Angeles/CA, US"
+          }
+        }'
+              );
+```
+
+
 
 > ### 1. Insert Config parameter
 > > `postgresql.conf` FIND A FILE LOCATION SCRIPT  
