@@ -43,13 +43,12 @@ public class Listner extends Thread
   private              String        eventMsg;
 
 
-  Listner(Connection jCon, EventProvider eProvider) throws
+  Listner(Connection jCon) throws
       SQLException
   {
     this.jCon = jCon;
     this.pgConn = jCon.unwrap(PGConnection.class);
     Statement stmt = jCon.createStatement();
-    this.eProvider = eProvider;
     stmt.execute("LISTEN  table_changes");
     stmt.close();
   }
@@ -67,7 +66,6 @@ public class Listner extends Thread
 
           for (int i = 0; i < notification.length; i++) {
             PGNotification A = notification[i];
-            eProvider.onMessage("provider"+A.getParameter().toString());
             // System.out.println(A.getName());
             System.out.println(A.getParameter().toString());
             System.out.println("for in" + instant.toString());

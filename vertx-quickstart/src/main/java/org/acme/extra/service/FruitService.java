@@ -15,6 +15,8 @@ public class FruitService {
   @Inject
   PgPool client;
 
+
+
   public Uni<Long> addFruit(Fruit fruit) {
 
     return client.preparedQuery("INSERT INTO fruits (name,color) VALUES ($1,$2) RETURNING (id)")

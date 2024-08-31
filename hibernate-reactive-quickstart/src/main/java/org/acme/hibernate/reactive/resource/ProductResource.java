@@ -241,6 +241,7 @@ public class ProductResource {
                  .onItem()
                  .transform(pgRowSet -> {
                    product.id = ((RowSet<Row>) pgRowSet).iterator().next().getLong("id");
+
                    return product;
                  })
                  .subscribeAsCompletionStage()

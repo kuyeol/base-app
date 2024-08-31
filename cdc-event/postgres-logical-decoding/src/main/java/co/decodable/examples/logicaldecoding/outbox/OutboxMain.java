@@ -92,6 +92,7 @@ public class OutboxMain {
                         content.get("aggregate_type").asText(),
                         content.get("aggregate_id").asText().getBytes(StandardCharsets.UTF_8),
                         mapper.writeValueAsBytes(content.get("payload")));
+
                 record.headers().add("message_id", content.get("id").asText().getBytes(StandardCharsets.UTF_8));
 
                 return record;

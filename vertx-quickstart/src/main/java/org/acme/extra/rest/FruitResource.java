@@ -20,7 +20,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 @Path("fruits")
 public class FruitResource
-  {
+{
 
   private final PgPool client;
 
@@ -28,12 +28,11 @@ public class FruitResource
 
   private final boolean schemaCreate;
 
-  public void m(){
 
-  Thread thread= new Thread();
-  thread.start();
-  thread.join();
-  }
+  public void m()
+    {
+
+    }
 
 
   public FruitResource( PgPool client, FruitService fruitService,
@@ -149,4 +148,4 @@ public class FruitResource
 
 
 
-  }
+}

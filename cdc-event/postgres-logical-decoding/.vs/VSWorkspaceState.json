@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\co",
+    "\\src\\main\\java\\co\\decodable",
+    "\\src\\main\\java\\co\\decodable\\examples",
+    "\\src\\main\\java\\co\\decodable\\examples\\logicaldecoding",
+    "\\src\\main\\java\\co\\decodable\\examples\\logicaldecoding\\advanceslot",
+    "\\src\\main\\java\\co\\decodable\\examples\\logicaldecoding\\auditing",
+    "\\src\\main\\java\\co\\decodable\\examples\\logicaldecoding\\auditing\\model"
+  ],
+  "SelectedNode": "\\src\\main\\java\\co\\decodable\\examples\\logicaldecoding\\outbox\\OutboxMain.java",
+  "PreviewInSolutionExplorer": false
+}
