@@ -1,5 +1,41 @@
 # TODO: 
 
+![img.png](img.png)
+
+---
+
+```mermaid
+graph TB
+subgraph 596f04fdeb4ce552["Untitled group"]
+02905d8c77389c25[" "]
+704422545447593a[" "]
+44bf9f92ea343e41[" "]
+
+end
+02905d8c77389c25[" "]
+704422545447593a[" "]
+44bf9f92ea343e41[" "]
+704422545447593a --> 44bf9f92ea343e41
+44bf9f92ea343e41 --> 02905d8c77389c25
+style 596f04fdeb4ce552 fill:#e9973f, stroke:#b6640c
+
+```
+
+
+write
+- transaction-service
+  - DataBase
+    - postgres
+  - a  
+
+
+read
+- balance-service
+    - DataBase
+        - mongodb
+  - a
+---
+
 - 이벤트 전달 데이터 타입 정의
 - 이벤트 스토어 디비 저장 로직
 
