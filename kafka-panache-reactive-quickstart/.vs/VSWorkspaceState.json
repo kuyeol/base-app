@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\sampleFiles",
+    "\\sampleFiles\\ibm-june24-messaging",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java\\com",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java\\com\\ibm",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java\\com\\ibm\\event",
+    "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java\\com\\ibm\\event\\sourcing"
+  ],
+  "SelectedNode": "\\sampleFiles\\ibm-june24-messaging\\eventsourcing-kafka\\src\\main\\java\\com\\ibm\\event\\sourcing\\EventRecord.java",
+  "PreviewInSolutionExplorer": false
+}
