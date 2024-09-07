@@ -1,7 +1,6 @@
 package org.acme.panache;
 
 import io.smallrye.mutiny.Uni;
-import io.vertx.core.Future;
 import io.vertx.mutiny.pgclient.PgPool;
 import io.vertx.mutiny.sqlclient.Row;
 import io.vertx.mutiny.sqlclient.RowSet;
@@ -10,6 +9,7 @@ import io.vertx.reactivex.core.Vertx;
 import io.vertx.sqlclient.Pool;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.acme.panache.model.User;
 
 
 @ApplicationScoped
@@ -65,9 +65,6 @@ public class PriceQuery
     }
 
 
-
-
-
   public static Price from( Row row )
     {
       return new Price( row.getLong( "id" ), row.getLong( "version" ) );
@@ -89,11 +86,10 @@ public class PriceQuery
   public Uni< Long > save( PgPool client )
     {
 
-      Price price1 = new Price();
-      price1.setId( 116l );
-      price1.setName( "dddd" );
+      User user = new User();
+
       return client.preparedQuery( "INSERT INTO price (name) VALUES ($1) RETURNING id" )
-                   .execute( Tuple.of( price1.name ) )
+                   .execute( Tuple.of( user.getUsername() ) )
                    .onItem()
                    .transform( pgRowSet -> pgRowSet.iterator().next().getLong( "id" ) );
     }

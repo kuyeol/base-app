@@ -1,32 +1,40 @@
 package org.acme.panache;
 
-import io.quarkus.hibernate.reactive.panache.Panache;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
-import jakarta.inject.Inject;
-import org.eclipse.microprofile.reactive.messaging.Incoming;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.control.ActivateRequestContext;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+import org.acme.panache.model.User;
+import org.eclipse.microprofile.reactive.messaging.Incoming;
+
 
 @ApplicationScoped
-public class PriceStorage {
+public class PriceStorage
+{
 
   @Inject
-  PriceQuery priceQuery;
-
+  UserQuery userQuery;
 
   @Inject
   PgPool pool;
 
-  @Incoming("prices")
+
+
   @ActivateRequestContext
-  Uni< Void > store( int priceInUsd )
+  @Transactional
+  Uni< Void > store( User user )
     {
-      Price price = new Price();
-      price.setCount( priceInUsd );
-      System.out.println("sss");
-      return priceQuery.save( pool ).replaceWithVoid();
+      User user1 = new User();
+      user1.setId( user.getId() );
+
+      System.out.println( "sss" );
+      return userQuery.saves(pool ,user).replaceWithVoid();
     }
+
+
+
+
 
 }

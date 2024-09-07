@@ -22,7 +22,7 @@ import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.hibernate.reactive.mutiny.Mutiny;
 
 
-@Path("KAFKA")
+//@Path("KAFKA")
 public class KafkaEndpoint
 {
 
@@ -30,11 +30,11 @@ public class KafkaEndpoint
   //@Channel("acc")
   //Emitter< Price > emitter;
   //
-  @Channel("acc")
-  Emitter< Record< Long, Price > > recordEmitter;
-
-  @Channel("kafka")
-  KafkaTransactions< Price > kafkaTx;
+  //@Channel("acc")
+  //Emitter< Record< Long, Price > > recordEmitter;
+  //
+  //@Channel("kafka")
+  //KafkaTransactions< Price > kafkaTx;
 
   //
   //@POST
@@ -44,62 +44,62 @@ public class KafkaEndpoint
   //    return emitter.send( price );
   //  }
 
-
-  @POST
-  @Path("recod")
-  @Produces(MediaType.APPLICATION_JSON)
-  public CompletionStage< Void > send( Price payload )
-    {
-      Long id = payload.getId();
-      return recordEmitter.send( Record.of( id, payload ) );
-    }
-
-
-  @Inject
-  Mutiny.SessionFactory sf;
-
-
-  @POST
-  @Path("/fruits")
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Bulkhead(1)
-  public Uni< Void > post( Price fruit )
-    {
-      Context context = Vertx.currentContext();
-      Properties props = new Properties();
-      props.setProperty( "bootstrap.servers", "localhost:9092" );
-      props.setProperty( "acks", "all" );
-      props.setProperty( "retries", "0" );`
-      props.setProperty( "batch.size", "16384" );
-      props.setProperty( "linger.ms", 1 );
-      props.setProperty( "buffer.memory", "33554432" );
-      props.setProperty( "key.serializer", "org.apache.kafka.common.serialization.StringSerializer" );
-      props.setProperty( "value.serializer", "org.apache.kafka.common.serialization.StringSerializer" );
-
-      ConsumerRecord< ?, ? > metadatas;
-      IncomingKafkaRecordMetadata< String, Double > metadata;
-
-      if ( metadata != null ) {
-        // The topic
-        String topic = metadata.getTopic();
-
-        // The key
-        String key = metadata.getKey();
-
-        // The timestamp
-        Instant timestamp = metadata.getTimestamp();
-
-        // The underlying record
-        ConsumerRecord< String, Double > record = metadata.getRecord();
-
-        // ...
-      }
-      return sf.withTransaction( session -> kafkaTx.withTransaction( emitter -> session.persist( fruit )
-                                                                                       .invoke( () -> emitter.send( fruit ) ) )
-                                                   .emitOn( context::runOnContext ) );
-    }
-
-
+  //
+  //@POST
+  //@Path("recod")
+  //@Produces(MediaType.APPLICATION_JSON)
+  //public CompletionStage< Void > send( Price payload )
+  //  {
+  //    Long id = payload.getId();
+  //    return recordEmitter.send( Record.of( id, payload ) );
+  //  }
+  //
+  //
+  //@Inject
+  //Mutiny.SessionFactory sf;
+  //
+  //
+  //@POST
+  //@Path("/fruits")
+  //@Consumes(MediaType.APPLICATION_JSON)
+  //@Bulkhead(1)
+  //public Uni< Void > post( Price fruit )
+  //  {
+  //    Context context = Vertx.currentContext();
+  //    Properties props = new Properties();
+  //    props.setProperty( "bootstrap.servers", "localhost:9092" );
+  //    props.setProperty( "acks", "all" );
+  //    props.setProperty( "retries", "0" );
+  //    props.setProperty( "batch.size", "16384" );
+  //    props.setProperty( "linger.ms","10"  );
+  //    props.setProperty( "buffer.memory", "33554432" );
+  //    props.setProperty( "key.serializer", "org.apache.kafka.common.serialization.StringSerializer" );
+  //    props.setProperty( "value.serializer", "org.apache.kafka.common.serialization.StringSerializer" );
+  //
+  //    ConsumerRecord< ?, ? > metadatas;
+  //    IncomingKafkaRecordMetadata< String, Double > metadata = null;
+  //
+  //    if ( metadata != null ) {
+  //      // The topic
+  //      String topic = metadata.getTopic();
+  //
+  //      // The key
+  //      String key = metadata.getKey();
+  //
+  //      // The timestamp
+  //      Instant timestamp = metadata.getTimestamp();
+  //
+  //      // The underlying record
+  //      ConsumerRecord< String, Double > record = metadata.getRecord();
+  //
+  //      // ...
+  //    }
+  //    return sf.withTransaction( session -> kafkaTx.withTransaction( emitter -> session.persist( fruit )
+  //                                                                                     .invoke( () -> emitter.send( fruit ) ) )
+  //                                                 .emitOn( context::runOnContext ) );
+  //  }
+  //
+  //
 
 
 

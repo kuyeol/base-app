@@ -19,7 +19,7 @@ public class PriceGenerator {
 
 
 
-    @Outgoing("generated-price")
+    //@Outgoing("generated-price")
     Multi<Integer> generate() {
         return Multi.createFrom().ticks().every(Duration.ofSeconds(100000))
                 .map(tick -> random.nextInt(100));
