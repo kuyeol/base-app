@@ -2,15 +2,14 @@
 ---
 ## 24_8_29
 ***
+
 ## kafka Example link
-
 > article https://www.infoq.com/profile/Alex-Soto/
-
-- [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
-- [ ] https://www.infoq.com/articles/change-data-capture-debezium/
-- [ ] https://www.infoq.com/articles/data-with-quarkus-kafka/
-- [ ] https://www.infoq.com/articles/testing-quarkus-reactive/
-- [ ] https://www.infoq.com/articles/microservicilities-tekton/
+ - [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
+ - [ ] https://www.infoq.com/articles/change-data-capture-debezium/
+ - [ ] https://www.infoq.com/articles/data-with-quarkus-kafka/
+ - [ ] https://www.infoq.com/articles/testing-quarkus-reactive/
+ - [ ] https://www.infoq.com/articles/microservicilities-tekton/
 
 
 ***
