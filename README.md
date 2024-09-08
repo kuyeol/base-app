@@ -1,8 +1,10 @@
 # TODO 
 ---
 ## 24_8_29
+***
 ## kafka Example link
-article https://www.infoq.com/profile/Alex-Soto/
+
+> article https://www.infoq.com/profile/Alex-Soto/
 
 - [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
 - [ ] https://www.infoq.com/articles/change-data-capture-debezium/
@@ -11,7 +13,7 @@ article https://www.infoq.com/profile/Alex-Soto/
 - [ ] https://www.infoq.com/articles/microservicilities-tekton/
 
 
-
+***
 
 Rest App
 > Produce/@channel Emitter send message : 이벤트 생성 -> 카프카 전달
