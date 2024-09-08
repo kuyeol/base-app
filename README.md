@@ -1,6 +1,9 @@
 # TODO 
 ---
 ## 24_8_29
+## kafka Example link
+
+- [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
 
 Rest App
 > Produce/@channel Emitter send message : 이벤트 생성 -> 카프카 전달
