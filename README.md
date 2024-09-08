@@ -4,7 +4,7 @@
 ## kafka Example link
 article https://www.infoq.com/profile/Alex-Soto/
 
-- [x] https://www.infoq.com/articles/quarkus-with-kafka-streams/
+- [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
 - [ ] https://www.infoq.com/articles/change-data-capture-debezium/
 - [ ] https://www.infoq.com/articles/data-with-quarkus-kafka/
 - [ ] https://www.infoq.com/articles/testing-quarkus-reactive/
