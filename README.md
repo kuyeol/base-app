@@ -5,11 +5,11 @@
 
 ## kafka Example link
 > article https://www.infoq.com/profile/Alex-Soto/
- - [ ] https://www.infoq.com/articles/quarkus-with-kafka-streams/
- - [ ] https://www.infoq.com/articles/change-data-capture-debezium/
- - [ ] https://www.infoq.com/articles/data-with-quarkus-kafka/
- - [ ] https://www.infoq.com/articles/testing-quarkus-reactive/
- - [ ] https://www.infoq.com/articles/microservicilities-tekton/
+ - [x] https://www.infoq.com/articles/quarkus-with-kafka-streams/
+ - [x] https://www.infoq.com/articles/change-data-capture-debezium/
+ - [x] https://www.infoq.com/articles/data-with-quarkus-kafka/
+ - [x] https://www.infoq.com/articles/testing-quarkus-reactive/
+ - [x] https://www.infoq.com/articles/microservicilities-tekton/
 
 
 ***
