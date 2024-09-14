@@ -1,12 +1,19 @@
 # lowlevel-sql
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Client Qeury & Hibernate Panache Query
 
-## Running the application in dev mode
+1. Using PgPool Call
+  - PgPool Inject
+  - PgPool Instance return & using query transfer query
 
-You can run your application in dev mode that enables live coding using:
+2. Using PanacheEntity Extends
+  - Entitiy extends PanacheEntity
+  - Entity return PanacheEntity method & @ApplicationScoped
+    
+
+
+
 
 ```shell script
 ./mvnw compile quarkus:dev
