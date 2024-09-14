@@ -1,7 +1,15 @@
-# lowlevel-sql
+# Low Level- Reactive Sql Client
+
+# TODO :
+
+> [!Note]
+> - Pagenationg
+> - sort
 
 
-## Client Qeury & Hibernate Panache Query
+
+
+# Client Qeury & Hibernate Panache Query
 
 1. Using PgPool Call
   - PgPool Inject
@@ -18,9 +26,12 @@
 
 
 
----
 
----
+
+</BR></BR></BR></BR>
+
+# QUARKUS DEFUALT TEXT
+<details> 
 
 ```shell script
 ./mvnw compile quarkus:dev
@@ -71,3 +82,4 @@ If you want to learn more about building native executables, please consult <htt
 
 - Reactive PostgreSQL client ([guide](https://quarkus.io/guides/reactive-sql-clients)): Connect to the PostgreSQL
   database using the reactive pattern
+ </details>
