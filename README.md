@@ -1,6 +1,18 @@
 # TODO 
 ---
 ## 24_8_29
+***
+
+## kafka Example link
+> article https://www.infoq.com/profile/Alex-Soto/
+ - [x] https://www.infoq.com/articles/quarkus-with-kafka-streams/
+ - [x] https://www.infoq.com/articles/change-data-capture-debezium/
+ - [x] https://www.infoq.com/articles/data-with-quarkus-kafka/
+ - [x] https://www.infoq.com/articles/testing-quarkus-reactive/
+ - [x] https://www.infoq.com/articles/microservicilities-tekton/
+
+
+***
 
 Rest App
 > Produce/@channel Emitter send message : 이벤트 생성 -> 카프카 전달
