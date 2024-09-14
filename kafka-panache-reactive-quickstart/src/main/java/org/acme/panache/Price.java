@@ -14,7 +14,7 @@ public class Price
 
   public Long version;
 
-  public int count;
+  public int counts;
 
 
   public Price(){ }
@@ -22,7 +22,7 @@ public class Price
     this.id = id;
   }
   public Price(int count){
-    this.count = count;
+    this.counts = count;
   }
 
 
@@ -91,13 +91,13 @@ public class Price
 
   public int getCount()
     {
-      return count;
+      return counts;
     }
 
 
   public void setCount( int count )
     {
-      this.count = count;
+      this.counts = count;
     }
 
 

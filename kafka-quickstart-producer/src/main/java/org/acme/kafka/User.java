@@ -1,47 +1,153 @@
 package org.acme.kafka;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.UUID;
+import org.acme.kafka.constant.ServiceType;
 
 
 @Entity
 @Table(name = "users")
-public class User extends PanacheEntityBase
+public class User
 {
 
   @Id
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
   @Column(name = "id", updatable = false, nullable = false)
-  public String id;
+  private UUID id;
 
+  @Column(name = "version", updatable = true, nullable = false)
+  private UUID version;
 
-  @Column(name = "account_id")
-  public String accountId;
+  @Column(name = "userid")
+  private String userId;
 
   @Column
-  public String description;
+  private String description;
 
   @Column
   @Enumerated(EnumType.STRING)
-  public EventType status;
+  private ServiceType status;
 
   @Column
-  public double value;
+  private double value;
+
+  @Column(name = "ts")
+  private LocalDateTime ts;
+
+
+  public LocalDateTime getTs()
+    {
+      return ts;
+    }
+
+
+  public void setTs( )
+    {
+      this.ts = LocalDateTime.now();
+    }
+
+
+  public User( UUID userId, User user,UUID version )
+    {
+      this.id          = userId;
+      this.userId      = user.getUserId();
+      this.description = user.getDescription();
+      this.status      = user.getStatus();
+      this.value       = user.getValue();
+      this.version     = version;
+      this.ts          = ts;
+    }
+
+
+  public User()
+    {
+
+    }
+
+
+  public UUID getId()
+    {
+      return id;
+    }
+
+
+  public void setId( UUID id )
+    {
+      this.id = id;
+    }
+
+
+  public String getUserId()
+    {
+      return userId;
+    }
+
+
+  public void setUserId( String userId )
+    {
+      this.userId = userId;
+    }
+
+
+  public String getDescription()
+    {
+      return description;
+    }
+
+
+  public void setDescription( String description )
+    {
+      this.description = description;
+    }
+
+
+  public ServiceType getStatus()
+    {
+      return status;
+    }
+
+
+  public void setStatus( ServiceType status )
+    {
+      this.status = status;
+    }
+
+
+  public double getValue()
+    {
+      return value;
+    }
+
+
+  public void setValue( double value )
+    {
+      this.value = value;
+    }
+
+
+  public UUID getVersion()
+    {
+      return version;
+    }
+
+
+  public void setVersion( UUID version )
+    {
+      this.version = UUID.randomUUID();
+    }
 
 
   @Override
   public String toString()
     {
-      return "User{" + "id='" + id + '\'' + ", accountId='" + accountId + '\'' + ", description='" + description +
-             '\'' + ", type=" +status + ", value=" + value + '}';
+      return "User{" + "id=" + id + ", version=" + version + ", userId='" + userId + '\'' + ", description='" +
+             description + '\'' + ", status=" + status + ", value=" + value + '}';
     }
 
 

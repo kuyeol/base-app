@@ -5,7 +5,7 @@ import io.vertx.mutiny.pgclient.PgPool;
 import io.vertx.mutiny.sqlclient.Row;
 import io.vertx.mutiny.sqlclient.RowSet;
 import io.vertx.mutiny.sqlclient.Tuple;
-import io.vertx.reactivex.core.Vertx;
+
 import io.vertx.sqlclient.Pool;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,7 +19,7 @@ public class PriceQuery
   @Inject
   PgPool client;
 
-  Vertx vertx;
+
 
   @Inject
   Pool pool;
