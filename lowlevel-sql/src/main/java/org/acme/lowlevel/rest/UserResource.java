@@ -1,6 +1,7 @@
 package org.acme.lowlevel.rest;
 
 
+import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
@@ -37,6 +38,7 @@ public class UserResource
 
 
   @POST
+  @WithTransaction
   public Uni< String > create( User user )
   {
 
@@ -50,8 +52,26 @@ public class UserResource
   }
 
 
+  @POST
+  @Path("{id}")
+  @WithTransaction
+  public Uni< User > update( @PathParam("id")
+  Long id, User user )
+  {
+
+    return client.preparedQuery( "UPDATE user_table set name =$2 WHERE id=$1" )
+                 .execute( Tuple.of( id, user.name) )
+                 .toMulti()
+                 .flatMap( Multi.createFrom()::iterable )
+                 .map( User::fromFilte )
+                 .toUni();
+
+  }
+
+
   @DELETE
   @Path("{id}")
+  @WithTransaction
   public Uni< Boolean > deletS( @PathParam("id")
   Long id )
   {

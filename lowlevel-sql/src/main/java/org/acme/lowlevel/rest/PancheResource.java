@@ -27,7 +27,6 @@ public class PancheResource
 {
 
   @GET
-  @WithTransaction
   public Uni< List< UserWithPanache > > products()
   {
 
@@ -35,6 +34,7 @@ public class PancheResource
   }
 
   @POST
+  @WithTransaction
   public Uni< Response > create(UserWithPanache user) {
     if (user == null || user.id != null) {
       throw new WebApplicationException( "Id was invalidly set on request.", 422);
