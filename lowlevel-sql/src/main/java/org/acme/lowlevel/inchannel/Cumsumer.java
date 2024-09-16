@@ -3,6 +3,7 @@ package org.acme.lowlevel.inchannel;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -12,10 +13,13 @@ import org.acme.lowlevel.model.User;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Message;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.jboss.resteasy.reactive.RestStreamElementType;
 
 
 @Path("inbound")
+
+@ApplicationScoped
 public class Cumsumer
 {
 
@@ -48,8 +52,8 @@ public class Cumsumer
 
 
 
-  @Produces(MediaType.APPLICATION_JSON)
-  @Incoming("usertabless")
+  @Incoming("usertable")
+  @Outgoing("price-updates")
   public Uni< Void > restGen( Message< User > m )
   {
 
@@ -58,7 +62,6 @@ public class Cumsumer
     return Uni.createFrom()
               .voidItem();
   }
-
 
 
 

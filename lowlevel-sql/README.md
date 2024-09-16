@@ -1,5 +1,77 @@
 # Low Level- Reactive Sql Client
 
+
+
+데이터 스트림
+소스 : 메세지 생성 발행
+싱크 :메세지 수신 소비
+프로세서 :  메세지 소비 -> 생성 -> 발행
+
+스프링 예제
+
+이벤트 생성 발행
+
+마이크로서비스 구성
+
+1.이벤트 생성 앱
+ - 대출 신청
+
+> public Supplier<Loan> summitLoan(){
+> return () -> {
+> String name;
+> Long amount;
+> Loan loan =new Loan(uuid,name,amount);
+> return loan;
+
+
+
+2.이벤트 소비 앱
+ - 신청 승인
+
+> public interface LoanProcessor{
+> String APPLICATIONS_IN = "output";
+> String APPROVED_OUT = "approved";
+> String DECLINED_OUT = "declined";
+> 
+> @Input(APPLICATIONS_IN)
+> SubscribableChannel sourceOfLoanApplications();
+> 
+> @Output(APPROVED_OUT)
+> MessageChannel approved();
+> 
+> @Output(DECLINED_OUT)
+> MessageChannel declined();
+> }
+
+
+> public void checkLoan(Loan loan)  
+> {   
+>   /**
+>   *MAX_AMOUNT 보다 크면 거절  */
+> 
+> > if ( loan.getAmount() > `MAX_AMOUNT`)
+> >   {
+> >       
+> >  loan.setStatus(Status.DECLINED.name());   
+> >  processor.declined().send(message(loan));     
+> >    }
+> 
+> > else
+> >  {
+> >
+> >      loan.setStatus(Status.APPROVED.name());
+> >      processor.approved().send(message(loan));
+> >   }
+> 
+> }
+>         
+
+
+
+
+
+
+
 # TODO :
 
 > [!Note]
