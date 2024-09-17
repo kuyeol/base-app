@@ -1,4 +1,11 @@
-# TODO 
+# TODO
+24_0917
+- [ ] kafka callback test
+ - repo Link -> [kafka-source-connector](https://github.com/kuyeol/base-app/blob/4a3604bf2c07a369e504b867bea4985cecbffad0/kafka-source-connector/README.md)
+
+
+
+
 ---
 ## 24_8_29
 ***
