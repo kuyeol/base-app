@@ -1,0 +1,5 @@
+fpij/AirportNames.java:10: error: 
+  unreported exception IOException; must be caught or declared to be thrown
+      .map(iataCode -> AirportInfo.getNameOfAirport(iataCode))
+                                                   ^
+1 error
